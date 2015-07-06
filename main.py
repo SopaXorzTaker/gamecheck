@@ -1,3 +1,4 @@
+import socket
 from flask import *
 from server_ping.server_ping_helper import ServerPingHelper
 
@@ -89,6 +90,8 @@ def chk():
         return render_template("result.html", address=":".join(addr), servtype=ping_result.server_type,
                                version=ping_result.version, description=mc_color(sanitize(ping_result.description)),
                                ping_time=ping_result.ping_time, icon_url=ping_result.icon_url)
+    except socket.timeout:
+        return app.send_static_file("timeout.html")
     except Exception as exception:
         return render_template("error.html", error=repr(exception))
 
