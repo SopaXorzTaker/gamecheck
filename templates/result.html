@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Server Check Result</title>
+</head>
+<body>
+    <h1>Server Ping Result</h1>
+    <label>Server address: {{ address }}</label>                     <br />
+    <label>Server type: {{ servtype.upper() }}</label>               <br />
+    <label>Server version: {{ version }}</label>                     <br />
+    <label>Server description: {{ description|safe }}</label>        <br />
+    <label>Server ping (ms): {{ ping_time }}</label>                 <br />
+    {% if icon_url %}
+    <img src="{{ icon_url }}" /><br />
+    {% endif %}
+    <a href="/">&lt;- Back</a>
+</body>
+</html>

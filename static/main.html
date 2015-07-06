@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>MC/MCPE Server Checker</title>
+    <style>
+        field {
+            width: 45px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Minecraft Server Checker!</h1>
+       <form action="/check" method="get">
+            <input type="text" name="address" class="field"><br />
+            <select name="type">
+                <option value="minecraft">Minecraft</option>
+                <option value="mcpe">Minecraft PE</option>
+            </select>
+            <button type="submit">Check!</button>
+       </form>
+    <small>JSON API: /api?host=&lt;host&gt;&port=&lt;port&gt;&type=&lt;minecraft | mcpe&gt;</small>
+</body>
+</html>
