@@ -16,7 +16,6 @@ def sanitize(text):
 
 def mc_color(text):
     out = ""
-    code = ""
 
     expect_code = False
 
