@@ -14,21 +14,29 @@ class MinecraftPinger(ServerPinger):
 
     def _receive_packet(self):
         # TODO: clean up, the issue here is because we don't receive the full frame first
-        length = 0
+        length = -1
         offset = 0
-        data = self._sock.recv(1024)
-        while length == 0:
-            data  += self._sock.recv(1024)
-            offset, length = DataTypes.read_varint(data, 0)
 
-        while len(data) < length - offset - 1:
-            data += self._sock.recv(1024)
+        data = b''
+        #while length == 0:
+        #    data  += self._sock.recv(1024)
+        #    offset, length = DataTypes.read_varint(data, 0)
+
+        while True:
+            if (len(data) < length - offset) or length == -1:
+                data += self._sock.recv(1024)
+            else:
+                break
+
+            if length == -1:
+                offset, length = DataTypes.read_varint(data, 0)
+                print(length)
 
         return data
 
     def _do_ping(self):
         self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self._sock.settimeout(5)
+        self._sock.settimeout(10)
         self._sock.connect(self.address)
         self._sock.send(encode_handshake(PROTOCOL_VERSION, self.address[0], self.address[1], 1))
         self._sock.send(encode_request())
