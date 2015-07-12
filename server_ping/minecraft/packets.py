@@ -64,7 +64,8 @@ def decode_response(buf, offset=0):
 
 def decode_pong(buf, offset=0):
     offset, packet = decode_packet(buf, offset)
-    if packet[0] != 0x01:
+    # Wiki.vg says that the ID is 0x00, but the actual server gave 0x01
+    if packet[0] not in [0x00, 0x01]:
         raise ValueError("Invalid packet %s" % hex(packet[0])[2:].zfill(2))
 
     payload = packet[1]
