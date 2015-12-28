@@ -11,7 +11,7 @@ COLORS = [
 
 
 def sanitize(text):
-    return text.replace("<", "").replace("\"", "").replace("'", "")
+    return text.replace("<", "&lt;").replace("\"", "&quot;").replace("'", "&#39;")
 
 
 def mc_color(text):
